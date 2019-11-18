@@ -36,6 +36,10 @@ li button.bold {
     width: 34px;
 }
 
+.square.win {
+    background: aquamarine;
+}
+
 .square:focus {
     outline: none;
 }
