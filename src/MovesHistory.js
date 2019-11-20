@@ -43,7 +43,7 @@ export class MovesHistory extends React.Component {
       <div>
         <ul>{moves}</ul>
         <button onClick={this.handleSortChange}>
-          Sort moves {this.state.sortMovesAsc ? 'ASC' : 'DESC'}
+          Sort moves ({this.state.sortMovesAsc ? 'OLD' : 'NEW'} FIRST)
         </button>
       </div>
     );
