@@ -1,6 +1,7 @@
-import React from "react";
+import React from 'react';
 import { Board } from './Board'
-import { calculateWinner } from "./utils";
+import { UserNameForm } from './UserNameForm'
+import { calculateWinner } from './utils';
 
 export class Game extends React.Component {
   constructor(props) {
@@ -15,7 +16,9 @@ export class Game extends React.Component {
       ],
       stepNumber: 0,
       xIsNext: true,
-      sortMovesAsc: true
+      sortMovesAsc: true,
+      xPlayerName: 'Player 1',
+      oPlayerName: 'Player 2'
     };
   }
 
@@ -26,7 +29,7 @@ export class Game extends React.Component {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    squares[i] = this.state.xIsNext ? "X" : "O";
+    squares[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState({
       history: history.concat([
         {
@@ -54,6 +57,21 @@ export class Game extends React.Component {
     });
   }
 
+  handleNameChange(isX, newName) {
+    this.setState({
+      ...this.state,
+      [isX ? 'xPlayerName' : 'oPlayerName']: newName
+    });
+  }
+
+  getUserName(label) {
+    return label === 'X' ? this.state.xPlayerName : this.state.oPlayerName;
+  }
+
+  getUserInfo(label) {
+    return `${label} (${this.getUserName(label)})`;
+  }
+
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
@@ -61,7 +79,7 @@ export class Game extends React.Component {
 
     const moves = history.map((step, move) => {
       const desc = move ?
-        'Go to move #' + move + ' (' + step.rowIndex + ', ' + step.colIndex + ')' :
+        `Go to move #${move} (${step.rowIndex}, ${step.colIndex})` :
         'Go to game start';
       return (
         <li key={move}>
@@ -81,26 +99,38 @@ export class Game extends React.Component {
 
     let status;
     if (winnerInfo) {
-      status = "Winner: " + winnerInfo.winner;
+      status = `Winner: ${this.getUserInfo(winnerInfo.winner)}`;
     } else if (current.squares.every(s => s !== null)) {
-      status = "Draw";
+      status = 'Draw';
     } else {
-      status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+      status = `Next player: ${this.state.xIsNext ? this.getUserInfo('X') : this.getUserInfo('O')}`
     }
 
     return (
-      <div className="game">
-        <div className="game-board">
+      <div className='game'>
+        <div className='game-board'>
           <Board
             squares={current.squares}
             winLine={winnerInfo ? winnerInfo.line : null}
             onClick={i => this.handleClick(i)}
           />
         </div>
-        <div className="game-info">
+        <div className='game-info'>
           <div>{status}</div>
           <ul>{moves}</ul>
-          <button onClick={() => this.handleSortChange()}>Sort moves {this.state.sortMovesAsc ? "ASC" : "DESC"}</button>
+          <button onClick={() => this.handleSortChange()}>Sort moves {this.state.sortMovesAsc ? 'ASC' : 'DESC'}</button>
+        </div>
+        <div className='form-container'>
+          <UserNameForm
+            value={this.state.xPlayerName}
+            playerLabel={'X'}
+            onSubmit={(newName) => this.handleNameChange(true, newName)}
+          />
+          <UserNameForm
+            value={this.state.oPlayerName}
+            playerLabel={'O'}
+            onSubmit={(newName) => this.handleNameChange(false, newName)}
+          />
         </div>
       </div>
     );

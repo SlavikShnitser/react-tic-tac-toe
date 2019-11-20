@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { Square } from './Square';
 
 export class Board extends React.Component {
@@ -25,7 +25,7 @@ export class Board extends React.Component {
       return (
         <div
           key={rowIndex}
-          className="board-row"
+          className='board-row'
         >
           {squares}
         </div>
