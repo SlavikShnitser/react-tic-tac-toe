@@ -1,6 +1,7 @@
 import React from 'react';
 import { Board } from './Board'
-import { UserNameForm } from './UserNameForm'
+import { UserNameForm } from './UserNameForm';
+import { MovesHistory } from './MovesHistory';
 import { calculateWinner } from './utils';
 
 export class Game extends React.Component {
@@ -16,7 +17,6 @@ export class Game extends React.Component {
       ],
       stepNumber: 0,
       xIsNext: true,
-      sortMovesAsc: true,
       xPlayerName: 'Player 1',
       oPlayerName: 'Player 2'
     };
@@ -50,13 +50,6 @@ export class Game extends React.Component {
     });
   }
 
-  handleSortChange() {
-    this.setState({
-      ...this.state,
-      sortMovesAsc: !this.state.sortMovesAsc
-    });
-  }
-
   handleNameChange(isX, newName) {
     this.setState({
       ...this.state,
@@ -72,39 +65,22 @@ export class Game extends React.Component {
     return `${label} (${this.getUserName(label)})`;
   }
 
+  getStatus() {
+    const current = this.state.history[this.state.stepNumber];
+    const winnerInfo = calculateWinner(current.squares);
+    if (winnerInfo) {
+      return `Winner: ${this.getUserInfo(winnerInfo.winner)}`;
+    } else if (current.squares.every(s => s !== null)) {
+      return 'Draw';
+    } else {
+      return `Next player: ${this.state.xIsNext ? this.getUserInfo('X') : this.getUserInfo('O')}`;
+    }
+  }
+
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winnerInfo = calculateWinner(current.squares);
-
-    const moves = history.map((step, move) => {
-      const desc = move ?
-        `Go to move #${move} (${step.rowIndex}, ${step.colIndex})` :
-        'Go to game start';
-      return (
-        <li key={move}>
-          <button
-            className={move === this.state.stepNumber ? 'bold' : ''}
-            onClick={() => this.jumpTo(move)}
-          >
-            {desc}
-          </button>
-        </li>
-      );
-    });
-
-    if (!this.state.sortMovesAsc) {
-      moves.reverse();
-    }
-
-    let status;
-    if (winnerInfo) {
-      status = `Winner: ${this.getUserInfo(winnerInfo.winner)}`;
-    } else if (current.squares.every(s => s !== null)) {
-      status = 'Draw';
-    } else {
-      status = `Next player: ${this.state.xIsNext ? this.getUserInfo('X') : this.getUserInfo('O')}`
-    }
 
     return (
       <div className='game'>
@@ -116,9 +92,12 @@ export class Game extends React.Component {
           />
         </div>
         <div className='game-info'>
-          <div>{status}</div>
-          <ul>{moves}</ul>
-          <button onClick={() => this.handleSortChange()}>Sort moves {this.state.sortMovesAsc ? 'ASC' : 'DESC'}</button>
+          <div>{this.getStatus()}</div>
+          <MovesHistory
+            history={history}
+            stepNumber={this.state.stepNumber}
+            jumpTo={(step) => this.jumpTo(step)}
+          />
         </div>
         <div className='form-container'>
           <UserNameForm
