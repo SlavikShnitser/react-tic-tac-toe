@@ -7,15 +7,13 @@ export class MovesHistory extends React.Component {
     this.state = {
       sortMovesAsc: true
     };
-
-    this.handleSortChange = this.handleSortChange.bind(this);
   }
 
-  handleSortChange() {
+  sortChangeHandler = () => {
     this.setState({
       sortMovesAsc: !this.state.sortMovesAsc
     });
-  }
+  };
 
   render() {
     const history = this.props.history;
@@ -42,7 +40,7 @@ export class MovesHistory extends React.Component {
     return (
       <div>
         <ul>{moves}</ul>
-        <button onClick={this.handleSortChange}>
+        <button onClick={this.sortChangeHandler}>
           Sort moves ({this.state.sortMovesAsc ? 'OLD' : 'NEW'} FIRST)
         </button>
       </div>

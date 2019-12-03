@@ -3,7 +3,7 @@
  * @param squares
  * @returns `{ winner: string, line: number[] }` if winner exists, otherwise `null`.
  */
-export function calculateWinner(squares) {
+export const calculateWinner = (squares) => {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -24,4 +24,4 @@ export function calculateWinner(squares) {
     }
   }
   return null;
-}
+};

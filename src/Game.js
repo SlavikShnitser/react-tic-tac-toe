@@ -22,7 +22,7 @@ export class Game extends React.Component {
     };
   }
 
-  handleClick(i) {
+  clickHandler = (i) => {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
@@ -41,31 +41,30 @@ export class Game extends React.Component {
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext
     });
-  }
+  };
 
-  jumpTo(step) {
+  jumpTo = (step) => {
     this.setState({
       stepNumber: step,
       xIsNext: (step % 2) === 0
     });
-  }
+  };
 
-  handleNameChange(isX, newName) {
+  nameChangeHandler = (isX, newName) => {
     this.setState({
-      ...this.state,
       [isX ? 'xPlayerName' : 'oPlayerName']: newName
     });
-  }
+  };
 
-  getUserName(label) {
+  getUserName = (label) => {
     return label === 'X' ? this.state.xPlayerName : this.state.oPlayerName;
-  }
+  };
 
-  getUserInfo(label) {
+  getUserInfo = (label) => {
     return `${label} (${this.getUserName(label)})`;
-  }
+  };
 
-  getStatus() {
+  getStatus = () => {
     const current = this.state.history[this.state.stepNumber];
     const winnerInfo = calculateWinner(current.squares);
     if (winnerInfo) {
@@ -75,7 +74,7 @@ export class Game extends React.Component {
     } else {
       return `Next player: ${this.state.xIsNext ? this.getUserInfo('X') : this.getUserInfo('O')}`;
     }
-  }
+  };
 
   render() {
     const history = this.state.history;
@@ -88,7 +87,7 @@ export class Game extends React.Component {
           <Board
             squares={current.squares}
             winLine={winnerInfo ? winnerInfo.line : null}
-            onClick={i => this.handleClick(i)}
+            onClick={this.clickHandler}
           />
         </div>
         <div className='game-info'>
@@ -96,20 +95,23 @@ export class Game extends React.Component {
           <MovesHistory
             history={history}
             stepNumber={this.state.stepNumber}
-            jumpTo={(step) => this.jumpTo(step)}
+            jumpTo={this.jumpTo}
           />
         </div>
         <div className='form-container'>
           <UserNameForm
             value={this.state.xPlayerName}
-            playerLabel={'X'}
-            onSubmit={(newName) => this.handleNameChange(true, newName)}
-          />
+            onSubmit={(newName) => this.nameChangeHandler(true, newName)}
+          >
+            User Name (X):
+          </UserNameForm>
+
           <UserNameForm
             value={this.state.oPlayerName}
-            playerLabel={'O'}
-            onSubmit={(newName) => this.handleNameChange(false, newName)}
-          />
+            onSubmit={(newName) => this.nameChangeHandler(false, newName)}
+          >
+            User Name (O):
+          </UserNameForm>
         </div>
       </div>
     );

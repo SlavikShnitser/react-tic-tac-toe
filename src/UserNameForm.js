@@ -7,29 +7,26 @@ export class UserNameForm extends React.Component {
     this.state = {
       value: props.value || ''
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
+  changeHandler = (event) => {
     this.setState({value: event.target.value});
-  }
+  };
 
-  handleSubmit(event) {
+  submitHandler = (event) => {
     event.preventDefault();
     this.props.onSubmit(this.state.value);
-  }
+  };
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.submitHandler}>
         <label>
-          User Name ({this.props.playerLabel}):
+          {this.props.children}
           <input
             type='text'
             value={this.state.value}
-            onChange={this.handleChange}
+            onChange={this.changeHandler}
           />
         </label>
         <input
