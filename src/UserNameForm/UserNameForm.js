@@ -1,5 +1,6 @@
-import './UserNameForm.css';
 import React from 'react';
+
+import './UserNameForm.css';
 
 export class UserNameForm extends React.Component {
   constructor(props) {

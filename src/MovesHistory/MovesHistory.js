@@ -1,5 +1,6 @@
-import './MovesHistory.css';
 import React from 'react';
+
+import './MovesHistory.css';
 
 export class MovesHistory extends React.Component {
   constructor(props) {
