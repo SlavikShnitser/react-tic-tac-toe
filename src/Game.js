@@ -101,14 +101,14 @@ export class Game extends React.Component {
         <div className='form-container'>
           <UserNameForm
             value={this.state.xPlayerName}
-            onSubmit={(newName) => this.nameChangeHandler(true, newName)}
+            onSubmit={this.nameChangeHandler.bind(this, true)}
           >
             User Name (X):
           </UserNameForm>
 
           <UserNameForm
             value={this.state.oPlayerName}
-            onSubmit={(newName) => this.nameChangeHandler(false, newName)}
+            onSubmit={this.nameChangeHandler.bind(this, false)}
           >
             User Name (O):
           </UserNameForm>
