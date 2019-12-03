@@ -1,5 +1,5 @@
 import React from 'react';
-import { Board } from '../Board/Board'
+import { Board } from '../Board/Board';
 import { UserNameForm } from '../UserNameForm/UserNameForm';
 import { MovesHistory } from '../MovesHistory/MovesHistory';
 import { calculateWinner } from '../utils';
