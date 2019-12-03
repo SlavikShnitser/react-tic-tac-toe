@@ -1,3 +1,4 @@
+import './MovesHistory.css';
 import React from 'react';
 
 export class MovesHistory extends React.Component {

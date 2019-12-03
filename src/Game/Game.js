@@ -1,8 +1,9 @@
+import './Game.css';
 import React from 'react';
-import { Board } from './Board'
-import { UserNameForm } from './UserNameForm';
-import { MovesHistory } from './MovesHistory';
-import { calculateWinner } from './utils';
+import { Board } from '../Board/Board'
+import { UserNameForm } from '../UserNameForm/UserNameForm';
+import { MovesHistory } from '../MovesHistory/MovesHistory';
+import { calculateWinner } from '../utils';
 
 export class Game extends React.Component {
   constructor(props) {
@@ -98,7 +99,7 @@ export class Game extends React.Component {
             jumpTo={this.jumpTo}
           />
         </div>
-        <div className='form-container'>
+        <div>
           <UserNameForm
             value={this.state.xPlayerName}
             onSubmit={this.nameChangeHandler.bind(this, true)}

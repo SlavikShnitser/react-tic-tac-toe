@@ -1,3 +1,4 @@
+import './UserNameForm.css';
 import React from 'react';
 
 export class UserNameForm extends React.Component {
@@ -20,7 +21,10 @@ export class UserNameForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.submitHandler}>
+      <form
+        className='form'
+        onSubmit={this.submitHandler}
+      >
         <label>
           {this.props.children}
           <input
