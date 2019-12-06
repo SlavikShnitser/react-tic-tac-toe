@@ -1,8 +1,6 @@
 import React from 'react';
 import Square from '../Square/Square';
 
-import './Board.css';
-
 export class Board extends React.Component {
   renderSquare = (i) => {
     const isWinSquare = this.props.winLine ?
@@ -25,10 +23,7 @@ export class Board extends React.Component {
         return this.renderSquare(rowIndex * 3 + colIndex);
       });
       return (
-        <div
-          key={rowIndex}
-          className='board-row'
-        >
+        <div key={rowIndex}>
           {squares}
         </div>
       );

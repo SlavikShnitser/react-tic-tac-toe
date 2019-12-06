@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './MovesHistory.css';
+import classes from './moves-history.module.css';
 
 export class MovesHistory extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ export class MovesHistory extends React.Component {
       return (
         <li key={move}>
           <button
-            className={move === this.props.stepNumber ? 'bold' : ''}
+            className={move === this.props.stepNumber ? classes.bold : ''}
             onClick={() => this.props.jumpTo(move)}
           >
             {desc}

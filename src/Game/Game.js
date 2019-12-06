@@ -4,7 +4,7 @@ import { UserNameForm } from '../UserNameForm/UserNameForm';
 import { MovesHistory } from '../MovesHistory/MovesHistory';
 import { calculateWinner } from '../utils';
 
-import './Game.css';
+import classes from './game.module.css';
 
 export class Game extends React.Component {
   constructor(props) {
@@ -84,16 +84,16 @@ export class Game extends React.Component {
     const winnerInfo = calculateWinner(current.squares);
 
     return (
-      <div className='game'>
-        <div className='game-board'>
+      <div className={classes['game']}>
+        <div>
           <Board
             squares={current.squares}
             winLine={winnerInfo ? winnerInfo.line : null}
             onClick={this.clickHandler}
           />
         </div>
-        <div className='game-info'>
-          <div>{this.getStatus()}</div>
+        <div className={classes['game-info']}>
+          <div className={classes['status']}>{this.getStatus()}</div>
           <MovesHistory
             history={history}
             stepNumber={this.state.stepNumber}
