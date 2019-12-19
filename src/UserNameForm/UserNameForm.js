@@ -3,13 +3,9 @@ import React from 'react';
 import classes from './username-form.module.css';
 
 export class UserNameForm extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      value: props.value || ''
-    };
-  }
+  state = {
+    value: this.props.value || ''
+  };
 
   changeHandler = (event) => {
     this.setState({value: event.target.value});

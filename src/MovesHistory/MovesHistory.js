@@ -3,13 +3,9 @@ import React from 'react';
 import classes from './moves-history.module.css';
 
 export class MovesHistory extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      sortMovesAsc: true
-    };
-  }
+  state = {
+    sortMovesAsc: true
+  };
 
   sortChangeHandler = () => {
     this.setState({

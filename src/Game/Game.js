@@ -7,22 +7,19 @@ import { calculateWinner } from '../utils';
 import classes from './game.module.css';
 
 export class Game extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      history: [
-        {
-          squares: Array(9).fill(null),
-          rowIndex: null,
-          colIndex: null
-        }
-      ],
-      stepNumber: 0,
-      xIsNext: true,
-      xPlayerName: 'Player 1',
-      oPlayerName: 'Player 2'
-    };
-  }
+  state = {
+    history: [
+      {
+        squares: Array(9).fill(null),
+        rowIndex: null,
+        colIndex: null
+      }
+    ],
+    stepNumber: 0,
+    xIsNext: true,
+    xPlayerName: 'Player 1',
+    oPlayerName: 'Player 2'
+  };
 
   clickHandler = (i) => {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
