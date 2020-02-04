@@ -7,6 +7,11 @@ export class UserNameForm extends React.Component {
     value: this.props.value || ''
   };
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.value !== this.props.value
+      || nextState.value !== this.state.value;
+  }
+
   changeHandler = (event) => {
     this.setState({value: event.target.value});
   };

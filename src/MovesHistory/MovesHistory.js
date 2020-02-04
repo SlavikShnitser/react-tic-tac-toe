@@ -7,6 +7,12 @@ export class MovesHistory extends React.Component {
     sortMovesAsc: true
   };
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.history !== this.props.history
+      || nextProps.stepNumber !== this.props.stepNumber
+      || nextState.sortMovesAsc !== this.state.sortMovesAsc;
+  }
+
   sortChangeHandler = () => {
     this.setState({
       sortMovesAsc: !this.state.sortMovesAsc
