@@ -1,4 +1,5 @@
 import React from 'react';
+import Aux from '../hoc/Auxiliary';
 
 import classes from './moves-history.module.css';
 
@@ -42,12 +43,12 @@ export class MovesHistory extends React.Component {
     }
 
     return (
-      <div>
+      <Aux>
         <ul>{moves}</ul>
         <button onClick={this.sortChangeHandler}>
           Sort moves ({this.state.sortMovesAsc ? 'OLD' : 'NEW'} FIRST)
         </button>
-      </div>
+      </Aux>
     );
   }
 }
