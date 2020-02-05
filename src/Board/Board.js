@@ -1,11 +1,7 @@
 import React from 'react';
 import Square from '../Square/Square';
 
-export class Board extends React.Component {
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
-    return this.props.squares !== nextProps.squares;
-  }
-
+export class Board extends React.PureComponent {
   renderSquare = (i) => {
     const isWinSquare = this.props.winLine ?
       this.props.winLine.indexOf(i) !== -1 :
