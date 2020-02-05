@@ -22,23 +22,25 @@ export class Game extends React.Component {
   };
 
   clickHandler = (i) => {
-    const history = this.state.history.slice(0, this.state.stepNumber + 1);
-    const current = history[history.length - 1];
-    const squares = current.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
-      return;
-    }
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
-    this.setState({
-      history: history.concat([
-        {
-          squares: squares,
-          rowIndex: Math.floor(i / 3),
-          colIndex: i % 3
-        }
-      ]),
-      stepNumber: history.length,
-      xIsNext: !this.state.xIsNext
+    this.setState(prevState => {
+      const history = prevState.history.slice(0, prevState.stepNumber + 1);
+      const current = history[history.length - 1];
+      const squares = current.squares.slice();
+      if (calculateWinner(squares) || squares[i]) {
+        return;
+      }
+      squares[i] = prevState.xIsNext ? 'X' : 'O';
+      return {
+        history: history.concat([
+          {
+            squares: squares,
+            rowIndex: Math.floor(i / 3),
+            colIndex: i % 3
+          }
+        ]),
+        stepNumber: history.length,
+        xIsNext: !prevState.xIsNext
+      }
     });
   };
 

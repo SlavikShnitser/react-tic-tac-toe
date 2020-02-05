@@ -14,9 +14,9 @@ export class MovesHistory extends React.Component {
   }
 
   sortChangeHandler = () => {
-    this.setState({
-      sortMovesAsc: !this.state.sortMovesAsc
-    });
+    this.setState(prevState => ({
+      sortMovesAsc: !prevState.sortMovesAsc
+    }));
   };
 
   render() {
