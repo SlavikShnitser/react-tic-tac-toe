@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import classes from './username-form.module.css';
 
@@ -43,3 +44,8 @@ export class UserNameForm extends React.Component {
     )
   }
 }
+
+UserNameForm.propTypes = {
+  value: PropTypes.string,
+  onSubmit: PropTypes.func
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import classes from './square.module.css';
 
@@ -15,6 +16,12 @@ const Square = (props) => {
       {props.value}
     </button>
   );
+};
+
+Square.propTypes = {
+  value: PropTypes.string,
+  winSquare: PropTypes.bool,
+  onClick: PropTypes.func
 };
 
 export default Square;

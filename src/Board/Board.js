@@ -1,5 +1,6 @@
 import React from 'react';
 import Square from '../Square/Square';
+import PropTypes from 'prop-types';
 
 export class Board extends React.PureComponent {
   renderSquare = (i) => {
@@ -31,3 +32,12 @@ export class Board extends React.PureComponent {
     return <div>{rows}</div>;
   }
 }
+
+Board.propTypes = {
+  squares: PropTypes.arrayOf(PropTypes.string),
+  winLine: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.number),
+    PropTypes.exact(null)
+  ]),
+  onClick: PropTypes.func
+};

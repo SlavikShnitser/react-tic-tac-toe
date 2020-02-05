@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import classes from './moves-history.module.css';
 
@@ -51,3 +52,9 @@ export class MovesHistory extends React.Component {
     );
   }
 }
+
+MovesHistory.propTypes = {
+  stepNumber: PropTypes.number,
+  jumpTo: PropTypes.func,
+  history: PropTypes.arrayOf(PropTypes.object)
+};
